@@ -1,0 +1,37 @@
+{
+  "name": "signum-twitter-tipbot",
+  "version": "1.0.0",
+  "description": "A Signum tipping bot for Twitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:update": "prisma db push",
+    "db:deploy-request": "prisma dr create fixcoin develop",
+    "db:deploy": "pscale dr deploy fixcoin",
+    "db:generate": "prisma generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohager/signum-twitter-tipbot.git"
+  },
+  "keywords": [
+    "signum",
+    "blockchain",
+    "twitter",
+    "bot",
+    "web3"
+  ],
+  "author": "ohager",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ohager/signum-twitter-tipbot/issues"
+  },
+  "homepage": "https://github.com/ohager/signum-twitter-tipbot#readme",
+  "devDependencies": {
+    "prisma": "^4.4.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.4.0",
+    "twitter-api-sdk": "^1.1.0"
+  }
+}
