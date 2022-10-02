@@ -13,7 +13,7 @@ function taskHandler ({ scheduler, jobId }) {
       }, 10_000)
       process.once('stopping-process', () => {
         console.log('Stopping job')
-        clearTimeout(timer);
+        clearTimeout(timer)
         process.emit('process-stopped')
       })
     })

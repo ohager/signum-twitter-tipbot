@@ -1,9 +1,9 @@
-function requestStop(cb) {
+function requestStop (cb) {
   process.emit('stopping-process')
   cb()
 }
 
-async function withGracefulShutdown(longRunningExecution, onStopCallback) {
+async function withGracefulShutdown (longRunningExecution, onStopCallback) {
   return new Promise(resolve => {
     // handle windows support (signals not available)
     // <http://pm2.keymetrics.io/docs/usage/signals-clean-restart/#windows-graceful-stop>
@@ -11,7 +11,7 @@ async function withGracefulShutdown(longRunningExecution, onStopCallback) {
       if (message === 'shutdown') {
         requestStop(onStopCallback)
       }
-    });
+    })
 
     // handle graceful restarts
     // support nodemon (SIGUSR2 as well)
@@ -19,7 +19,7 @@ async function withGracefulShutdown(longRunningExecution, onStopCallback) {
     for (const sig of ['SIGTERM', 'SIGHUP', 'SIGINT', 'SIGUSR2']) {
       process.once(sig, async () => {
         requestStop(onStopCallback)
-      });
+      })
     }
 
     process.on('process-stopped', () => {
@@ -29,9 +29,8 @@ async function withGracefulShutdown(longRunningExecution, onStopCallback) {
     })
 
     longRunningExecution()
-
   })
 }
- module.exports = {
+module.exports = {
   withGracefulShutdown
- }
+}
