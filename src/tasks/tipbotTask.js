@@ -6,11 +6,16 @@ function taskHandler ({ scheduler, jobId }) {
       // stopping scheduler to avoid execution runtime overlaps
       scheduler.stopById(jobId)
       console.log('Running Task...')
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         scheduler.startById(jobId)
         console.log('Finishing Task...')
         resolve()
       }, 10_000)
+      process.once('stopping-process', () => {
+        console.log('Stopping job')
+        clearTimeout(timer);
+        process.emit('process-stopped')
+      })
     })
   }
 }
