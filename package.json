@@ -2,12 +2,16 @@
   "name": "signum-twitter-tipbot",
   "version": "1.0.0",
   "description": "A Signum tipping bot for Twitter",
-  "main": "index.js",
+  "main": "./index.js",
+  "engines": {
+    "node": "16"
+  },
   "scripts": {
+    "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:update": "prisma db push",
-    "db:deploy-request": "prisma dr create fixcoin develop",
-    "db:deploy": "pscale dr deploy fixcoin",
+    "db:deploy-request": "prisma dr create signum-community develop",
+    "db:deploy": "pscale dr deploy signum-community",
     "db:generate": "prisma generate"
   },
   "repository": {
@@ -32,6 +36,9 @@
   },
   "dependencies": {
     "@prisma/client": "^4.4.0",
+    "convict": "^6.2.3",
+    "dotenv": "^16.0.3",
+    "toad-scheduler": "^1.6.1",
     "twitter-api-sdk": "^1.1.0"
   }
 }
