@@ -1,5 +1,5 @@
 
-module.exports = function parseCommand(twitterMessage){
+module.exports = function parseCommand (twitterMessage) {
   // TODO
   return {
     command: 'tip',
@@ -9,4 +9,3 @@ module.exports = function parseCommand(twitterMessage){
     quantity: '100'
   }
 }
-

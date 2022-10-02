@@ -1,3 +1,3 @@
-module.exports = async function deposit() {
+module.exports = async function deposit () {
   return Promise.resolve()
 }

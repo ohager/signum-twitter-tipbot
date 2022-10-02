@@ -1,7 +1,6 @@
-const {AsyncTask} = require('toad-scheduler')
+const { AsyncTask } = require('toad-scheduler')
 
-
-function taskHandler({scheduler, jobId}) {
+function taskHandler ({ scheduler, jobId }) {
   return async function () {
     return new Promise(resolve => {
       // stopping scheduler to avoid execution runtime overlaps
@@ -16,7 +15,7 @@ function taskHandler({scheduler, jobId}) {
   }
 }
 
-async function taskErrorHandler(err) {
+async function taskErrorHandler (err) {
   console.error('Some error occurred', err)
   return Promise.resolve()
 }
@@ -24,6 +23,5 @@ async function taskErrorHandler(err) {
 module.exports = (scheduler) => new AsyncTask(
   'tip-bot-task',
   taskHandler(scheduler),
-  taskErrorHandler,
+  taskErrorHandler
 )
-

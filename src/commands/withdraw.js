@@ -1,3 +1,3 @@
-module.exports = async function withdraw() {
+module.exports = async function withdraw () {
   return Promise.resolve()
 }

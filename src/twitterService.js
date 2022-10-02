@@ -1,23 +1,22 @@
-const Context = require("./context")
+const Context = require('./context')
 
 class TwitterService {
-  #context;
-  constructor(context) {
+  #context
+  constructor (context) {
     this.#context = context
   }
 
-  async readDirectMessages(){
+  async readDirectMessages () {
     return Promise.resolve()
   }
 
-  async readMentionedMessages(){
+  async readMentionedMessages () {
     return Promise.resolve()
   }
 
-  async answerDirectMessage() {
+  async answerDirectMessage () {
     return Promise.resolve()
   }
-
 }
 
 module.exports = new TwitterService(Context)
