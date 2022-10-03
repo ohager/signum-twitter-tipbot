@@ -1,4 +1,4 @@
-function handleTask({scheduler, jobId}, asyncTask, asyncTaskOnCancelCallback) {
+function handleTask ({ scheduler, jobId }, asyncTask, asyncTaskOnCancelCallback) {
   return async function () {
     scheduler.stopById(jobId)
     console.log('Running Task...', jobId)
@@ -16,4 +16,3 @@ function handleTask({scheduler, jobId}, asyncTask, asyncTaskOnCancelCallback) {
 module.exports = {
   handleTask
 }
-
