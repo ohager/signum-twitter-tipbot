@@ -4,7 +4,7 @@ const { withGracefulShutdown } = require('./withGracefulShutdown')
 
 const TipBotJobId = 'tipBotJob';
 
-(() => {
+(async () => {
   const scheduler = new ToadScheduler()
   return withGracefulShutdown(() => {
     const job = new SimpleIntervalJob(
