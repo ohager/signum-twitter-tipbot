@@ -1,22 +1,21 @@
 const { AsyncTask } = require('toad-scheduler')
 const { handleTask } = require('./handleTask')
+const {tipBotTaskImpl} = require("./tipbotTaskImpl");
 
 let timer
 
 async function task () {
-  return new Promise((resolve) => {
-    console.log('tip bot task started')
-    // TODO: implementation
-    timer = setTimeout(() => {
-      console.log('tip bot task stopped')
-      resolve()
-    }, 2_000)
-  })
+    console.log('Starting Task...')
+    await tipBotTaskImpl()
+    console.log('Finished Task...')
 }
 
 async function onCancelTask () {
   return new Promise(resolve => {
     console.log('cancelling tip bot task...')
+
+    // TODO: cleanup here!
+
     clearTimeout(timer)
     setTimeout(() => {
       resolve()

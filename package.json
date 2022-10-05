@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
+    "run:once": "node ./src/run-once.js",
     "test": "npm run format && jest --passWithNoTests",
     "format": "standard --fix",
     "db:update": "prisma db push",

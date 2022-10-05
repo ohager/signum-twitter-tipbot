@@ -5,7 +5,7 @@ const { LedgerClientFactory } = require('@signumjs/core')
 module.exports = {
   Database: new PrismaClient(),
   Twitter: {
-    ApiKey: process.env.TWITTER_API_KEY,
+    BearerToken: process.env.TWITTER_API_BEARER_TOKEN,
     BotAccountId: process.env.TWITTER_BOT_ACCOUNT_ID
   },
   Signum: {
