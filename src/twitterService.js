@@ -30,7 +30,7 @@ class TwitterService {
 
   async getUserId (userName) {
     const result = await withErrorHandling(
-      async () => this.#twitter.users.findUserByUsername(userName)
+      () => this.#twitter.users.findUserByUsername(userName)
     )
     return result.id
   }
