@@ -16,3 +16,9 @@ This updates the configured database (configure in `.env`), which should always 
 With Planetscale you use - similar to git - branches, which can be merged to other branches then.
 1. Open a PR with `yarn db:deploy-request <some name>`
 2. If 1 was successful and tests work as expected run `yarn db:deploy <number_of_dr>`, where `number_of_dr` is the number returned by 1
+
+# Design
+
+## User Input/Output
+
+![Flowcharts - Page 1(1)](https://user-images.githubusercontent.com/39196313/194147904-721d4860-846d-4159-973e-4a6b9c41b699.png)
