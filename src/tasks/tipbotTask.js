@@ -4,15 +4,13 @@ const { handleTask } = require('./handleTask')
 let timer
 
 async function task () {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     console.log('tip bot task started')
-
     // TODO: implementation
-
     timer = setTimeout(() => {
       console.log('tip bot task stopped')
       resolve()
-    }, 10_000)
+    }, 2_000)
   })
 }
 
