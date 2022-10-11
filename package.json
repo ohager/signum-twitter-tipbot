@@ -46,6 +46,6 @@
     "@signumjs/util": "^1.0.0-rc.34",
     "dotenv": "^16.0.3",
     "toad-scheduler": "^1.6.1",
-    "twitter-api-sdk": "^1.1.0"
+    "twitter-api-v2": "^1.12.8"
   }
 }

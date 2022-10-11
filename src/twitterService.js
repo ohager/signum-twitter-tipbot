@@ -1,5 +1,6 @@
 const Context = require('./context')
-const { Client } = require('twitter-api-sdk')
+
+const { TwitterApi } = require('twitter-api-v2')
 
 class TwitterApiError extends Error {
   constructor (msg) {
@@ -21,30 +22,53 @@ const withErrorHandling = async (twitterCall) => {
 
 class TwitterService {
   #context
-  #twitter
 
   constructor (context) {
     this.#context = context
-    this.#twitter = new Client(context.Twitter.BearerToken)
+
+    const client = new TwitterApi({
+      appKey: this.#context.Twitter.ConsumerKey,
+      appSecret: this.#context.Twitter.ConsumerSecret,
+      accessToken: this.#context.Twitter.AccessToken,
+      accessSecret: this.#context.Twitter.AccessTokenSecret
+    })
+
+    this.v1Client = client.v1
+    this.v2Client = client.v2
   }
 
   async getUserId (userName) {
     const result = await withErrorHandling(
-      () => this.#twitter.users.findUserByUsername(userName)
+      () => this.v2Client.userByUsername(userName)
     )
     return result.id
   }
 
-  async readDirectMessages () {
-    return Promise.resolve()
+  // might not be needed
+  async getDirectMessages (id) {
+    const result = await withErrorHandling(
+      () => this.v1Client.getDmEvent(id)
+    )
+    return result
+  }
+
+  async listDirectMessages () {
+    const result = await this.v1Client.listDmEvents()
+    return result
   }
 
   async readMentionedMessages () {
     return Promise.resolve()
   }
 
-  async answerDirectMessage () {
-    return Promise.resolve()
+  async answerDirectMessage (id, text) {
+    const result = await withErrorHandling(
+      () => this.this.v1Client.sendDm({
+        recipient_id: id,
+        text
+      })
+    )
+    return result.id
   }
 }
 
