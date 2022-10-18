@@ -47,5 +47,8 @@
     "dotenv": "^16.0.3",
     "toad-scheduler": "^1.6.1",
     "twitter-api-sdk": "^1.1.0"
+  },
+  "standard": {
+    "env": [ "jest" ]
   }
 }
