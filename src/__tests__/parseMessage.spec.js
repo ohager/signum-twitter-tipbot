@@ -8,14 +8,19 @@ describe('parseMessage', () => {
       }).toThrow('No command found')
     })
   })
-  describe(' - help', () => {
+  describe(' - no args commands', () => {
     it('should detect help command', () => {
       expect(parseMessage('!help')).toEqual({ command: 'help' })
     })
-    it('should throw on unknown command', () => {
-      expect(() => {
-        parseMessage('some unknown !command')
-      }).toThrow('No command found')
+    it('should detect balance | bal command', () => {
+      expect(parseMessage('!balance')).toEqual({ command: 'balance' })
+      expect(parseMessage('!bal')).toEqual({ command: 'bal' })
+    })
+    it('should detect fees command', () => {
+      expect(parseMessage('!fees')).toEqual({ command: 'fees' })
+    })
+    it('should detect terms command', () => {
+      expect(parseMessage('!terms')).toEqual({ command: 'terms' })
     })
   })
   describe('- tip', () => {

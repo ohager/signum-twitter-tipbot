@@ -20,7 +20,7 @@ class InvalidArgsError extends MessageParseError {
 }
 
 function identifyCommand (message) {
-  const result = /!(?<cmd>tip|help|deposit|market|withdraw)/igm.exec(message)
+  const result = /!(?<cmd>tip|help|deposit|market|withdraw|balance|bal|fees|terms)/igm.exec(message)
   if (!result) {
     throw new MessageParseError('No command found', ErrorCodes.NoKnownCommandFound)
   }
@@ -93,6 +93,10 @@ function getArguments (command, message) {
     case 'market':
       return getMarketArguments(message)
     case 'help':
+    case 'balance':
+    case 'bal':
+    case 'fees':
+    case 'terms':
       return undefined // no args required;
     default:
       throw new MessageParseError(`Unsupported command [${command}]`, ErrorCodes.UnsupportedCommand)
