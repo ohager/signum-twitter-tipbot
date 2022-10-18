@@ -1,6 +1,4 @@
 
-const SupportedTickers = ['SIGNA', 'TRT']
-
 const ErrorCodes = {
   NoKnownCommandFound: 1,
   UnsupportedCommand: 2,
@@ -22,12 +20,15 @@ class InvalidArgsError extends MessageParseError {
 }
 
 function identifyCommand (message) {
-  const result = /!(?<cmd>tip|help|deposit|rain)/igm.exec(message)
+  const result = /!(?<cmd>tip|help|deposit|market|withdraw)/igm.exec(message)
   if (!result) {
     throw new MessageParseError('No command found', ErrorCodes.NoKnownCommandFound)
   }
   return result.groups.cmd
 }
+
+const SupportedTickers = ['SIGNA', 'TRT']
+const SupportedMarketTickers = ['SIGNA', 'BTC', 'ETH']
 
 function getTipArguments (message) {
   const result = new RegExp(`!tip\\s(?<amount>\\d+(\\.\\d{0,8})?)\\s(?<ticker>${SupportedTickers.join('|')})(?<users>(\\s@\\w{0,15})+)`, 'igm').exec(message)
@@ -44,6 +45,19 @@ function getTipArguments (message) {
   throw new InvalidArgsError('tip')
 }
 
+function getWithdrawArguments (message) {
+  const result = new RegExp(`!withdraw\\s(?<amount>\\d+(\\.\\d{0,8})?)\\s(?<ticker>${SupportedTickers.join('|')})`, 'igm').exec(message)
+  if (result) {
+    const { amount, ticker } = result.groups
+    return {
+      amount,
+      ticker
+    }
+  }
+
+  throw new InvalidArgsError('withdraw')
+}
+
 function getDepositArguments (message) {
   const result = new RegExp(`!deposit\\s(?<ticker>${SupportedTickers.join('|')})`, 'igm').exec(message)
   if (result) {
@@ -56,12 +70,28 @@ function getDepositArguments (message) {
   throw new InvalidArgsError('deposit')
 }
 
+function getMarketArguments (message) {
+  const result = new RegExp(`!market\\s(?<ticker>${SupportedMarketTickers.join('|')})`, 'igm').exec(message)
+  if (result) {
+    const { ticker } = result.groups
+    return {
+      ticker
+    }
+  }
+
+  throw new InvalidArgsError('market')
+}
+
 function getArguments (command, message) {
   switch (command) {
     case 'tip':
       return getTipArguments(message)
     case 'deposit':
       return getDepositArguments(message)
+    case 'withdraw':
+      return getWithdrawArguments(message)
+    case 'market':
+      return getMarketArguments(message)
     case 'help':
       return undefined // no args required;
     default:
